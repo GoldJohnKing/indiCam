@@ -45,11 +45,11 @@ if (str _this == "[]") then { // There really should be a more elegant way to do
 private _case = (indiCam_var_actorSwitchSettings select 0);	// If nothing was passed, assume switching occurs between what is currently set
 
 // Executes the proper function for each mode and kills the current running one.
-switch (_case) do {
+switch (_case) do { // Edited: Refactor actor list
 
 	case 0: { // Only players of all sides anywhere
 				if (indiCam_debug) then {systemChat format ["Case: %1 - Auto switching between only players of all sides.", _case];};
-				_newActor = selectRandom allPlayers;
+				_newActor = selectRandom (allPlayers - [player]);
 			};
 			
 	case 1: { // Closest unit of any side 
@@ -110,19 +110,40 @@ switch (_case) do {
 	case 7: { // Random unit search started within distance actor side
 				if (indiCam_debug) then {systemChat format ["Case: %1 - Auto switching to units on current side within given distance.", _case];};
 				
-				{
-					if (side _x == _actorSide) then {_sortedArray pushback _x};
-				} forEach _unitArray;
-				
-				_unitArray = _sortedArray;
-				_sortedArray = [];
-				
-				private _distance = 500;
-				while { ((count _unitArray) < 2) || (_distance < 50000) } do { // Altis terrain is 47000m from corner to corner
-					
-					_sortedArray = [_unitArray,indiCam_actor,_distance] call indiCam_fnc_distanceSort;
-					_distance = _distance * 1.25;
+				private _camPlayerUnits = playableUnits;
+				private _camEnemyUnits;
+
+				if !(isNil btc_gear_object) then {
+					_camPlayerUnits = _camPlayerUnits - _camPlayerUnits inAreaArray [getPosWorld btc_gear_object, 150, 150];
 				};
+
+				{
+					{
+						_camEnemyUnits pushBackUnique _x;
+					} forEach (allUnits inAreaArray [_x, 200, 200]);
+				} forEach _camPlayerUnits;
+				
+				_unitArray = _camPlayerUnits append _camEnemyUnits;
+
+				if (_camEnemyUnits == []) then {
+					_sortedArray = _unitArray;
+				} else {
+					_sortedArray = [selectRandom _camPlayerUnits, selectRandom _camEnemyUnits];
+				};
+			
+				// {
+				// 	if (side _x == _actorSide && {!(_x isPlayer) && {!(local _x)}}) then {_sortedArray pushback _x};
+				// } forEach _unitArray;
+				
+				// _unitArray = _sortedArray;
+				// _sortedArray = [];
+				
+				// private _distance = 500;
+				// while { ((count _unitArray) < 2) || (_distance < 50000) } do { // Altis terrain is 47000m from corner to corner
+					
+				// 	_sortedArray = [_unitArray,indiCam_actor,_distance] call indiCam_fnc_distanceSort;
+				// 	_distance = _distance * 1.25;
+				// };
 				if (count _sortedArray > 1) then {_newActor = selectRandom _sortedArray} else {/*No other unit was to be found, do nothing*/ };
 			};
 			

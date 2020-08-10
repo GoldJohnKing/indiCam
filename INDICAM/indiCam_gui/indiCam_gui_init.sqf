@@ -36,7 +36,7 @@ indiCam_var_guiPlayerListArray = [];
 // Scene time override
 indiCam_fnc_guiSceneOverride = {}; // Run both controls in the same function
 indiCam_var_guiSceneOverrideCheckboxState = false;
-indiCam_var_guiSceneOverrideSliderState = 150;
+indiCam_var_guiSceneOverrideSliderState = 90; // Edited: Modify slider init value, default = 300
 
 
 // Vision mode
@@ -51,7 +51,7 @@ indiCam_fnc_guiCheckboxActorAutoswitch = {};
 indiCam_fnc_guiDropdownActorAutoswitch = {};
 indiCam_var_guiActorAutoswitchCheckboxState = false;
 indiCam_var_guiActorAutoswitchDropdownState = 0;
-indiCam_var_guiActorAutoswitchSliderState = 300;
+indiCam_var_guiActorAutoswitchSliderState = 45; // Edited: Modify slider init value, default = 300
 indiCam_var_guiActorAutoswitchSliderChanged = 999999;
 
 
