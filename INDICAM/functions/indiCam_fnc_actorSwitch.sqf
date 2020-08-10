@@ -110,21 +110,26 @@ switch (_case) do { // Edited: Refactor actor list
 	case 7: { // Random unit search started within distance actor side
 				if (indiCam_debug) then {systemChat format ["Case: %1 - Auto switching to units on current side within given distance.", _case];};
 				
-				private _camPlayerUnits = playableUnits;
-				private _camEnemyUnits;
+				private _camPlayerUnits = [];
+				private _camEnemyUnits = [];
+				
+				{ // Get All players
+					if (isPlayer _x) then {
+						_camPlayerUnits pushBackUnique _x;
+					};
+				} forEach playableUnits;
 
-				if !(isNull btc_gear_object) then {
+				if !(isNull btc_gear_object) then { // Exclude all players at base
 					_camPlayerUnits = _camPlayerUnits - _camPlayerUnits inAreaArray [getPosWorld btc_gear_object, 150, 150];
 				};
 
-				{
+				{ // Get all enemy players near players
 					{
 						_camEnemyUnits pushBackUnique _x;
 					} forEach (allUnits inAreaArray [_x, 250, 250]);
 				} forEach _camPlayerUnits;
 				
-				_unitArray = _camPlayerUnits + _camEnemyUnits;
-				_sortedArray = _unitArray - [player];
+				_sortedArray = camPlayerUnits + _camEnemyUnits - [player, indiCam_actor]; // Combine unit list
 			
 				// {
 				// 	if (side _x == _actorSide && {!(_x isPlayer) && {!(local _x)}}) then {_sortedArray pushback _x};
