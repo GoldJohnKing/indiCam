@@ -98,7 +98,7 @@ if ( ((getPos vehicle indiCam_actor) select 2) < 3 ) then { // Aircraft on groun
 			indiCam_var_takeTime = 20;				// Time after which a new scene will be selected
 			_posX = selectRandom [random [-150,-20,-150],random [20,150,20]]; 	// Specifies the range for the camera position sideways to the actor
 			_posY = selectRandom [random [-150,-20,-150],random [20,150,20]]; 	// Specifies the range for the camera position to the front and back of the actor
-			_posZ = random [40,60,80];				// Specifies the range for the camera position vertically from the actor
+			_posZ = random [150,300,500];			// Edited: Increase height of skyCam, default = random [40,60,80] - Specifies the range for the camera position vertically from the actor
 			indiCam_var_cameraPos = [_posX,_posY,_posZ];		// Position of camera relative to the actor
 			indiCam_var_targetPos = [0,10,1.8];		// Position of camera target relative to the actor
 			indiCam_var_targetSpeed = 0.1;			// Defines how tightly the logic will track it's defined position
@@ -203,7 +203,7 @@ if ( (((getPos vehicle indiCam_actor) select 2) > 3) && (((getPos vehicle indiCa
 			indiCam_var_takeTime = 20;				// Time after which a new scene will be selected
 			_posX = selectRandom [random [-150,-20,-150],random [20,150,20]]; 	// Specifies the range for the camera position sideways to the actor
 			_posY = selectRandom [random [-150,-20,-150],random [20,150,20]]; 	// Specifies the range for the camera position to the front and back of the actor
-			_posZ = random [40,60,80];				// Specifies the range for the camera position vertically from the actor
+			_posZ = random [150,300,500];			// Edited: Increase height of skyCam, default = random [40,60,80] - Specifies the range for the camera position vertically from the actor
 			indiCam_var_cameraPos = [_posX,_posY,_posZ];		// Position of camera relative to the actor
 			indiCam_var_targetPos = [0,10,1.8];		// Position of camera target relative to the actor
 			indiCam_var_targetSpeed = 0.1;			// Defines how tightly the logic will track it's defined position
