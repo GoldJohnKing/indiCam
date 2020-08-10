@@ -125,7 +125,7 @@ switch (_case) do { // Edited: Refactor actor list
 				
 				_unitArray = _camPlayerUnits append _camEnemyUnits;
 
-				if (_camEnemyUnits == []) then {
+				if (count _camEnemyUnits == 0) then {
 					_sortedArray = _unitArray;
 				} else {
 					_sortedArray = [selectRandom _camPlayerUnits, selectRandom _camEnemyUnits];
