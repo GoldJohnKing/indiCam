@@ -120,16 +120,11 @@ switch (_case) do { // Edited: Refactor actor list
 				{
 					{
 						_camEnemyUnits pushBackUnique _x;
-					} forEach (allUnits inAreaArray [_x, 200, 200]);
+					} forEach (allUnits inAreaArray [_x, 250, 250]);
 				} forEach _camPlayerUnits;
 				
-				_unitArray = _camPlayerUnits append _camEnemyUnits;
-
-				if (count _camEnemyUnits == 0) then {
-					_sortedArray = _unitArray;
-				} else {
-					_sortedArray = [selectRandom _camPlayerUnits, selectRandom _camEnemyUnits];
-				};
+				_unitArray = _camPlayerUnits + _camEnemyUnits;
+				_sortedArray = _unitArray - [player];
 			
 				// {
 				// 	if (side _x == _actorSide && {!(_x isPlayer) && {!(local _x)}}) then {_sortedArray pushback _x};
