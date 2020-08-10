@@ -23,11 +23,11 @@ indiCam_var_scriptedSceneChance = 20; // Defines percentage chance of scripted s
 
 indiCam_var_hiddenActorTime = 4; // Seconds to allow the actor to be hidden before switching scene unless active scene ignores this setting
 indiCam_var_actorSwitchSettings = [ // Default setting array for the actor switching. Affects how indiCam_fnc_actorSwitch and actor auto switching.
-									5,				// 0 - Actor switch SIDE [0=WEST,1=EAST,2=resistance,3=civilian,4=all,5=actorSide]
+									4,				// Edited: Set actor side to all, default = 6 - 0 - Actor switch SIDE [0=WEST,1=EAST,2=resistance,3=civilian,4=all,5=actorSide]
 									false,			// 1 - Restrict to players only
 									-1, 			// 2 - random unit within this proximity of actor (-1 means closest)
-									false,			// 3 - Actor auto switch is off/on
-									300, 			// 4 - Actor auto switch duration
+									true,			// Edited: Set actor switch to on, default = false - 3 - Actor auto switch is off/on
+									45, 			// Edited: Decrease actor switch duration, default = 300 - 4 - Actor auto switch duration
 									WEST 			// 5 - Actor side
 								  ];
 

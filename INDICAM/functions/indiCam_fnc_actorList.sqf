@@ -30,16 +30,16 @@ private _actorList = []; // Declare function array
 // Go through all the units and only add the eligible to the list
 {
 
-	if ( (_x != player) && (alive _x) ) then { // Adding this check is 33% faster than doing it in all the ones below on each _x
+	if ( (_x != player) && {alive _x} ) then { // Edited: Use lazy evaluation to improve performance - Adding this check is 33% faster than doing it in all the ones below on each _x
 
-		if ( (_west or _all) and (side _x == WEST) ) then {_actorList pushBackUnique _x;};
-		if ( (_east or _all) and (side _x == EAST) ) then {_actorList pushBackUnique _x;};
-		if ( (_civ or _all) and (side _x == civilian) ) then {_actorList pushBackUnique _x;};
-		if ( (_guer or _all) and (side _x == resistance) ) then {_actorList pushBackUnique _x;};
+		if ( (_west or _all) and {side _x == WEST} ) then {_actorList pushBackUnique _x;};
+		if ( (_east or _all) and {side _x == EAST} ) then {_actorList pushBackUnique _x;};
+		if ( (_civ or _all) and {side _x == civilian} ) then {_actorList pushBackUnique _x;};
+		if ( (_guer or _all) and {side _x == resistance} ) then {_actorList pushBackUnique _x;};
 		
-		if ( ((_allPlayers) and (isPlayer _x) and !(local _x)) ) then {_actorList pushBackUnique _x;}; // Edited: Exclude player who is executing the camera
+		if ( ((_allPlayers) and {(isPlayer _x) and !{local _x}} ) then {_actorList pushBackUnique _x;}; // Edited: Exclude player who is executing the camera
 
-		if ( (_actorSide) and ((side _x) == indiCam_var_actorSide) ) then {_actorList pushBackUnique _x;};
+		if ( (_actorSide) and {((side _x) == indiCam_var_actorSide) and !{(isPlayer _x) and {local _x}}} ) then {_actorList pushBackUnique _x;};
 	
 	};
 	

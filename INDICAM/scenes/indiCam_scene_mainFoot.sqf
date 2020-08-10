@@ -90,7 +90,7 @@ if (indiCam_var_actionValue == 0) then { // Low action value scenes
 			indiCam_var_takeTime = 60;				// Time after which a new scene will be selected
 			_posX = random [-40,0,40]; 				// Specifies the range for the camera position sideways to the actor
 			_posY = random [-40,0,40];				// Specifies the range for the camera position to the front and back of the actor
-			_posZ = random [150,300,500];			// Edited: Increase height of skyCam, default = random [40,60,80] - Specifies the range for the camera position vertically from the actor
+			_posZ = random [250,300,500];			// Edited: Increase height of skyCam, default = random [40,60,80] - Specifies the range for the camera position vertically from the actor
 			indiCam_var_cameraPos = [_posX,_posY,_posZ];		// Position of camera relative to the actor
 			indiCam_var_targetPos = [0,5,1.8];		// Position of camera target relative to the actor
 			indiCam_var_targetSpeed = 0.1;			// Defines how tightly the logic will track it's defined position
@@ -300,7 +300,7 @@ if (indiCam_var_actionValue == 1) then { // Medium action value scenes
 			indiCam_var_takeTime = 60;				// Time after which a new scene will be selected
 			_posX = random [-40,0,40]; 				// Specifies the range for the camera position sideways to the actor
 			_posY = random [-40,0,40];				// Specifies the range for the camera position to the front and back of the actor
-			_posZ = random [150,300,500];			// Edited: Increase height of skyCam, default = random [40,60,80] - Specifies the range for the camera position vertically from the actor
+			_posZ = random [250,300,500];			// Edited: Increase height of skyCam, default = random [40,60,80] - Specifies the range for the camera position vertically from the actor
 			indiCam_var_cameraPos = [_posX,_posY,_posZ];		// Position of camera relative to the actor
 			indiCam_var_targetPos = [0,5,1.8];		// Position of camera target relative to the actor
 			indiCam_var_targetSpeed = 0.1;			// Defines how tightly the logic will track it's defined position
@@ -445,7 +445,7 @@ if (indiCam_var_actionValue == 2) then { // High action value scenes
 			indiCam_var_takeTime = 60;				// Time after which a new scene will be selected
 			_posX = random [-40,0,40]; 				// Specifies the range for the camera position sideways to the actor
 			_posY = random [-40,0,40];				// Specifies the range for the camera position to the front and back of the actor
-			_posZ = random [150,300,500];			// Edited: Increase height of skyCam, default = random [40,60,80] - Specifies the range for the camera position vertically from the actor
+			_posZ = random [250,300,500];			// Edited: Increase height of skyCam, default = random [40,60,80] - Specifies the range for the camera position vertically from the actor
 			indiCam_var_cameraPos = [_posX,_posY,_posZ];		// Position of camera relative to the actor
 			indiCam_var_targetPos = [0,5,1.8];		// Position of camera target relative to the actor
 			indiCam_var_targetSpeed = 0.1;			// Defines how tightly the logic will track it's defined position
@@ -550,7 +550,7 @@ if (indiCam_var_actionValue == 3) then { // Very high action value scenes
 			indiCam_var_takeTime = 60;				// Time after which a new scene will be selected
 			_posX = random [-40,0,40]; 				// Specifies the range for the camera position sideways to the actor
 			_posY = random [-40,0,40];				// Specifies the range for the camera position to the front and back of the actor
-			_posZ = random [150,300,500];			// Edited: Increase height of skyCam, default = random [40,60,80] - Specifies the range for the camera position vertically from the actor
+			_posZ = random [250,300,500];			// Edited: Increase height of skyCam, default = random [40,60,80] - Specifies the range for the camera position vertically from the actor
 			indiCam_var_cameraPos = [_posX,_posY,_posZ];		// Position of camera relative to the actor
 			indiCam_var_targetPos = [0,5,1.8];		// Position of camera target relative to the actor
 			indiCam_var_targetSpeed = 0.1;			// Defines how tightly the logic will track it's defined position
