@@ -113,7 +113,7 @@ switch (_case) do { // Edited: Refactor actor list
 				private _camPlayerUnits = playableUnits;
 				private _camEnemyUnits;
 
-				if !(isNil btc_gear_object) then {
+				if !(isNull btc_gear_object) then {
 					_camPlayerUnits = _camPlayerUnits - _camPlayerUnits inAreaArray [getPosWorld btc_gear_object, 150, 150];
 				};
 
