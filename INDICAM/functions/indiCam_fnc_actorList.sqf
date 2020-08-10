@@ -37,7 +37,7 @@ private _actorList = []; // Declare function array
 		if ( (_civ or _all) and {side _x == civilian} ) then {_actorList pushBackUnique _x;};
 		if ( (_guer or _all) and {side _x == resistance} ) then {_actorList pushBackUnique _x;};
 		
-		if ( ((_allPlayers) and {(isPlayer _x) and !{local _x}} ) then {_actorList pushBackUnique _x;}; // Edited: Exclude player who is executing the camera
+		if ( (_allPlayers) and {(isPlayer _x) and !{local _x}} ) then {_actorList pushBackUnique _x;}; // Edited: Exclude player who is executing the camera
 
 		if ( (_actorSide) and {((side _x) == indiCam_var_actorSide) and !{(isPlayer _x) and {local _x}}} ) then {_actorList pushBackUnique _x;};
 	
