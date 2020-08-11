@@ -110,27 +110,25 @@ switch (_case) do { // Edited: Refactor actor list
 	case 7: { // Random unit search started within distance actor side
 				if (indiCam_debug) then {systemChat format ["Case: %1 - Auto switching to units on current side within given distance.", _case];};
 				
-				private _camPlayerUnits = [];
-				private _camEnemyUnits = [];
+				private _camPlayerUnits = playableUnits;
+				private _camUnits = [];
 				
-				{ // Get All players
-					if (isPlayer _x) then {
-						_camPlayerUnits pushBackUnique _x;
-					};
-				} forEach playableUnits;
+				// { // Get All players
+				// 	if (isPlayer _x) then {
+				// 		_camPlayerUnits pushBackUnique _x;
+				// 	};
+				// } forEach playableUnits;
 
 				if !(isNull btc_gear_object) then { // Exclude all players at base
-					_camPlayerUnits = _camPlayerUnits - _camPlayerUnits inAreaArray [getPosWorld btc_gear_object, 150, 150];
+					_camPlayerUnits = _camPlayerUnits - (_camPlayerUnits inAreaArray [getPosWorld btc_gear_object, 250, 250]);
 				};
 
-				{ // Get all enemy players near players
+				{ // Get all units near players (including players)
 					{
-						_camEnemyUnits pushBackUnique _x;
-					} forEach (allUnits inAreaArray [_x, 250, 250]);
+						_camUnits pushBackUnique _x;
+					} forEach (allUnits inAreaArray [getPosWorld _x, 250, 250]);
 				} forEach _camPlayerUnits;
 				
-				_sortedArray = camPlayerUnits + _camEnemyUnits - [player, indiCam_actor]; // Combine unit list
-			
 				// {
 				// 	if (side _x == _actorSide && {!(_x isPlayer) && {!(local _x)}}) then {_sortedArray pushback _x};
 				// } forEach _unitArray;
@@ -144,7 +142,7 @@ switch (_case) do { // Edited: Refactor actor list
 				// 	_sortedArray = [_unitArray,indiCam_actor,_distance] call indiCam_fnc_distanceSort;
 				// 	_distance = _distance * 1.25;
 				// };
-				if (count _sortedArray > 1) then {_newActor = selectRandom _sortedArray} else {/*No other unit was to be found, do nothing*/ };
+				if (count _camUnits > 1) then {_newActor = selectRandom (_camUnits - [player])} else {/*No other unit was to be found, do nothing*/ };
 			};
 			
 			
