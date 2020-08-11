@@ -142,7 +142,13 @@ switch (_case) do { // Edited: Refactor actor list
 				// 	_sortedArray = [_unitArray,indiCam_actor,_distance] call indiCam_fnc_distanceSort;
 				// 	_distance = _distance * 1.25;
 				// };
-				if (count _camUnits > 1) then {_newActor = selectRandom (_camUnits - [player])} else {/*No other unit was to be found, do nothing*/ };
+				if ((count _camUnits) > 1) then {
+					_newActor = selectRandom _camUnits;
+					indiCam_actor = _newActor;
+				} else {
+					_newActor = player;
+					indiCam_actor = _newActor;
+				};
 			};
 			
 			
