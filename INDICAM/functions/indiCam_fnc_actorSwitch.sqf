@@ -127,7 +127,7 @@ switch (_case) do { // Edited: Refactor actor list
 					_camUnits = _camUnits - (_camUnits inAreaArray [getPosWorld btc_gear_object, 300, 300]);
 				};
 
-				if (((count _camUnits) < 1) && {!(isNull btc_create_object)}) && then { // If there's no unit in _camUnits, we can choose random players, or use static weapons to observe base
+				if (((count _camUnits) < 1) && {!(isNull btc_create_object)}) then { // If there's no unit in _camUnits, we can choose random players, or use static weapons to observe base
 					_camUnits = playableUnits + (_camPlayerUnits inAreaArray [getPosWorld btc_create_object, 50, 50]);
 				};
 
