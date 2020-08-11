@@ -27,7 +27,7 @@ indiCam_var_actorSwitchSettings = [ // Default setting array for the actor switc
 									false,			// 1 - Restrict to players only
 									-1, 			// 2 - random unit within this proximity of actor (-1 means closest)
 									true,			// Edited: Set actor switch to on, default = false - 3 - Actor auto switch is off/on
-									45, 			// Edited: Decrease actor switch duration, default = 300 - 4 - Actor auto switch duration
+									30, 			// Edited: Decrease actor switch duration, default = 300 - 4 - Actor auto switch duration
 									WEST 			// 5 - Actor side
 								  ];
 

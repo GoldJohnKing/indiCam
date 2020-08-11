@@ -132,7 +132,7 @@ switch (_case) do { // Edited: Refactor actor list
 				};
 
 				if ((count _camUnits) > 1) then { // If there's units in _camUnits, use them
-					_newActor = selectRandom _camUnits - [player];
+					_newActor = selectRandom _camUnits;
 					indiCam_actor = _newActor;
 				} else { // If there's still no unit in _camUnits, just use a random unit
 					_newActor = selectRandom allUnits;
