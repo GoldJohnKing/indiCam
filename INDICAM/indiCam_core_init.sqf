@@ -218,7 +218,7 @@ indiCam_fnc_init = {	// Here to suspend initialization if there is a mission con
 	indiCam_var_targetSpeed = 1;
 	indiCam_var_cameraTarget = player;
 	indiCam_var_cameraTargetScripted = player;
-	indiCam_var_cameraFov = 0.74;
+	indiCam_var_cameraFov = 0.85; // Edited: Increase FOV to have a better view on high resolution monitor, default = 0.74
 	indiCam_var_maxDistance = 5000;
 	indiCam_var_ignoreHiddenActor = false;
 	indiCam_var_cameraType = "";

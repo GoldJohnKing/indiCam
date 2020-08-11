@@ -132,7 +132,7 @@ while {true} do {
 		indiCam_var_targetPos = [0,0,1.8];		// Position of camera target relative to the actor
 		indiCam_var_targetSpeed = 0.6;			// Defines how tightly the logic will track it's defined position
 		indiCam_var_cameraTarget = indiCam_var_proxyTarget;	// The object that the camera is aimed at
-		indiCam_var_cameraFov = random [0.1,0.2,0.3]; // Field of view, standard Arma FOV is 0.74
+		indiCam_var_cameraFov = random [0.3,0.5,0.75]; // Edited: Increase FOV, default = [0.1,0.2,0.3] - Field of view, standard Arma FOV is 0.74
 		indiCam_var_maxDistance = 600;			// Max distance between actor and camera before scene switches
 		indiCam_var_ignoreHiddenActor = false;	// True will disable line of sight checks during scene, actor may stay hidden
 		indiCam_var_cameraAttach = false;		// Control whether the camera should be attached to anything
