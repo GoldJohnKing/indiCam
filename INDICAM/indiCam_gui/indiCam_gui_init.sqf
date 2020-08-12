@@ -46,11 +46,11 @@ indiCam_var_guiVisionModeDropdownState = 0;
 
 // Actor auto switch
 indiCam_fnc_guiActorAutoswitch = {};
-indiCam_var_guiActorAutoswitchRunning = false;
+indiCam_var_guiActorAutoswitchRunning = true; // Edited: Modify checkbox init value, default = false
 indiCam_fnc_guiCheckboxActorAutoswitch = {};
 indiCam_fnc_guiDropdownActorAutoswitch = {};
 indiCam_var_guiActorAutoswitchCheckboxState = false;
-indiCam_var_guiActorAutoswitchDropdownState = 0;
+indiCam_var_guiActorAutoswitchDropdownState = 7; // Edited: Modify dropdown menu init value, default = 0
 indiCam_var_guiActorAutoswitchSliderState = 30; // Edited: Modify slider init value, default = 300
 indiCam_var_guiActorAutoswitchSliderChanged = 999999;
 
