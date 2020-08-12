@@ -240,7 +240,7 @@ if ( (((getPos vehicle indiCam_actor) select 2) > 15) && (((getPos vehicle indiC
 			indiCam_var_targetPos = [0,10,2];		// Position of camera target relative to the actor
 			indiCam_var_targetSpeed = 0.3;			// Defines how tightly the logic will track it's defined position
 			indiCam_var_cameraTarget = indiCam_var_proxyTarget;		// The object that the camera is aimed at
-			indiCam_var_cameraFov = 0.5;			// Field of view, standard Arma FOV is 0.74
+			indiCam_var_cameraFov = 0.75;			// Edited: Increase FOV, default = 0.5 - Field of view,standard Arma FOV is 0.74
 			indiCam_var_maxDistance = 10000;		// Max distance between actor and camera before scene switches
 			indiCam_var_ignoreHiddenActor = false;	// True will disable line of sight checks during scene, actor may stay hidden
 			indiCam_var_cameraAttach = false;		// Control whether the camera should be attached to anything
@@ -313,7 +313,7 @@ if ( (((getPos vehicle indiCam_actor) select 2) > 15) && (((getPos vehicle indiC
 			indiCam_var_targetPos = [0,50,1.8];		// Position of camera target relative to the actor
 			indiCam_var_targetSpeed = 0.1;			// Defines how tightly the logic will track it's defined position
 			indiCam_var_cameraTarget = indiCam_var_proxyTarget;		// The object that the camera is aimed at
-			indiCam_var_cameraFov = random [0.2,0.35,0.2];			// Field of view, standard Arma FOV is 0.74
+			indiCam_var_cameraFov = random [0.75,0.85,0.9];			// Edited: Increase FOV, default = [0.2,0.35,0.2] - Field of view, standard Arma FOV is 0.74
 			indiCam_var_maxDistance = 1500;			// Max distance between actor and camera before scene switches
 			indiCam_var_ignoreHiddenActor = false;	// True will disable line of sight checks during scene, actor may stay hidden
 			indiCam_var_cameraAttach = false;		// Control whether the camera should be attached to anything
@@ -345,7 +345,7 @@ if ( (((getPos vehicle indiCam_actor) select 2) > 600) ) then { // Aircraft high
 			indiCam_var_targetPos = [0,10,2];		// Position of camera target relative to the actor
 			indiCam_var_targetSpeed = 0.3;			// Defines how tightly the logic will track it's defined position
 			indiCam_var_cameraTarget = indiCam_var_proxyTarget;		// The object that the camera is aimed at
-			indiCam_var_cameraFov = 0.5;			// Field of view, standard Arma FOV is 0.74
+			indiCam_var_cameraFov = 0.75;			// Edited: Increase FOV, default = 0.5 - Field of view,standard Arma FOV is 0.74
 			indiCam_var_maxDistance = 10000;		// Max distance between actor and camera before scene switches
 			indiCam_var_ignoreHiddenActor = false;	// True will disable line of sight checks during scene, actor may stay hidden
 			indiCam_var_cameraAttach = false;		// Control whether the camera should be attached to anything
@@ -418,7 +418,7 @@ if ( (((getPos vehicle indiCam_actor) select 2) > 600) ) then { // Aircraft high
 			indiCam_var_targetPos = [0,50,1.8];		// Position of camera target relative to the actor
 			indiCam_var_targetSpeed = 0.1;			// Defines how tightly the logic will track it's defined position
 			indiCam_var_cameraTarget = indiCam_var_proxyTarget;		// The object that the camera is aimed at
-			indiCam_var_cameraFov = random [0.2,0.35,0.2];			// Field of view, standard Arma FOV is 0.74
+			indiCam_var_cameraFov = random [0.75,0.85,0.9];			// Edited: Increase FOV, default = [0.2,0.35,0.2] - Field of view, standard Arma FOV is 0.74
 			indiCam_var_maxDistance = 1500;			// Max distance between actor and camera before scene switches
 			indiCam_var_ignoreHiddenActor = false;	// True will disable line of sight checks during scene, actor may stay hidden
 			indiCam_var_cameraAttach = false;		// Control whether the camera should be attached to anything
