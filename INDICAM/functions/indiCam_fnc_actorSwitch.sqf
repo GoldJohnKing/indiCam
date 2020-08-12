@@ -128,7 +128,7 @@ switch (_case) do { // Edited: Refactor actor list
 				};
 
 				if (((count _camUnits) < 1) && {!(isNull btc_create_object)}) then { // If there's no unit in _camUnits, we can choose random players, or use static weapons to observe base
-					_camUnits = playableUnits + (_camPlayerUnits inAreaArray [getPosWorld btc_create_object, 50, 50]);
+					_camUnits = playableUnits + (_camPlayerUnits inAreaArray [getPosWorld btc_create_object, 75, 75]);
 				};
 
 				if ((count _camUnits) > 1) then { // If there's units in _camUnits, use them
