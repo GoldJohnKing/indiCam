@@ -46,7 +46,7 @@ indiCam_var_guiVisionModeDropdownState = 0;
 
 // Actor auto switch
 indiCam_fnc_guiActorAutoswitch = {};
-indiCam_var_guiActorAutoswitchRunning = true; // Edited: Modify checkbox init value, default = false
+indiCam_var_guiActorAutoswitchRunning = false;
 indiCam_fnc_guiCheckboxActorAutoswitch = {};
 indiCam_fnc_guiDropdownActorAutoswitch = {};
 indiCam_var_guiActorAutoswitchCheckboxState = false;
