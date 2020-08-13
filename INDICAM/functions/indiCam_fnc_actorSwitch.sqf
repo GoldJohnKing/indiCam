@@ -47,9 +47,38 @@ private _case = (indiCam_var_actorSwitchSettings select 0);	// If nothing was pa
 // Executes the proper function for each mode and kills the current running one.
 switch (_case) do { // Edited: Refactor actor list
 
-	case 0: { // Only players of all sides anywhere
+	case 0: { // Edited: Replace default method - Only players of all sides anywhere
 				if (indiCam_debug) then {systemChat format ["Case: %1 - Auto switching between only players of all sides.", _case];};
-				_newActor = selectRandom (allPlayers - [player]);
+				
+				private _camPlayerUnits = playableUnits;
+				private _camUnits = [];
+				
+				if !(isNull btc_gear_object) then { // Exclude all players at base, this can improve performance, because there are always many players at base
+					_camPlayerUnits = _camPlayerUnits - (_camPlayerUnits inAreaArray [getPosWorld btc_gear_object, 300, 300]);
+				};
+
+				{ // Get all units near players (including players itself or other players, so we use pushBackUnique)
+					{
+						_camUnits pushBackUnique _x;
+					} forEach (allUnits inAreaArray [getPosWorld _x, 150, 150]);
+				} forEach _camPlayerUnits;
+
+				if !(isNull btc_gear_object) then { // Exclude other units at base (such as AI)
+					_camUnits = _camUnits - (_camUnits inAreaArray [getPosWorld btc_gear_object, 300, 300]);
+				};
+
+				if (((count _camUnits) < 1) && {!(isNull btc_create_object)}) then { // If there's no unit in _camUnits, we can choose random players, or use static weapons to observe base
+					_camUnits = playableUnits + (_camPlayerUnits inAreaArray [getPosWorld btc_create_object, 100, 100]);
+				};
+
+				if ((count _camUnits) > 1) then { // If there's units in _camUnits, use them
+					_newActor = selectRandom _camUnits;
+				} else { // If there's still no unit in _camUnits, just use a random unit
+					_newActor = selectRandom allUnits;
+				};
+
+				// Below are default behavior of this case
+				// _newActor = selectRandom (allPlayers - [player]);
 			};
 			
 	case 1: { // Closest unit of any side 
@@ -109,59 +138,27 @@ switch (_case) do { // Edited: Refactor actor list
 			
 	case 7: { // Random unit search started within distance actor side
 				if (indiCam_debug) then {systemChat format ["Case: %1 - Auto switching to units on current side within given distance.", _case];};
+
+				{ // Get All players
+					if (isPlayer _x) then {
+						_camPlayerUnits pushBackUnique _x;
+					};
+				} forEach playableUnits;
+
+				{
+					if (side _x == _actorSide && {!(_x isPlayer) && {!(local _x)}}) then {_sortedArray pushback _x};
+				} forEach _unitArray;
 				
-				private _camPlayerUnits = playableUnits;
-				private _camUnits = [];
+				_unitArray = _sortedArray;
+				_sortedArray = [];
 				
-				if !(isNull btc_gear_object) then { // Exclude all players at base, this can improve performance, because there are always many players at base
-					_camPlayerUnits = _camPlayerUnits - (_camPlayerUnits inAreaArray [getPosWorld btc_gear_object, 300, 300]);
-				};
-
-				{ // Get all units near players (including players itself or other players, so we use pushBackUnique)
-					{
-						_camUnits pushBackUnique _x;
-					} forEach (allUnits inAreaArray [getPosWorld _x, 300, 300]);
-				} forEach _camPlayerUnits;
-
-				if !(isNull btc_gear_object) then { // Exclude other units at base (such as AI)
-					_camUnits = _camUnits - (_camUnits inAreaArray [getPosWorld btc_gear_object, 300, 300]);
-				};
-
-				if (((count _camUnits) < 1) && {!(isNull btc_create_object)}) then { // If there's no unit in _camUnits, we can choose random players, or use static weapons to observe base
-					_camUnits = playableUnits + (_camPlayerUnits inAreaArray [getPosWorld btc_create_object, 75, 75]);
-				};
-
-				if ((count _camUnits) > 1) then { // If there's units in _camUnits, use them
-					_newActor = selectRandom _camUnits;
-					indiCam_actor = _newActor;
-				} else { // If there's still no unit in _camUnits, just use a random unit
-					_newActor = selectRandom allUnits;
-					indiCam_actor = _newActor;
-				};
-
-				// Below are default behavior of this case
-
-				// { // Get All players
-				// 	if (isPlayer _x) then {
-				// 		_camPlayerUnits pushBackUnique _x;
-				// 	};
-				// } forEach playableUnits;
-
-				// {
-				// 	if (side _x == _actorSide && {!(_x isPlayer) && {!(local _x)}}) then {_sortedArray pushback _x};
-				// } forEach _unitArray;
-				
-				// _unitArray = _sortedArray;
-				// _sortedArray = [];
-				
-				// private _distance = 500;
-				// while { ((count _unitArray) < 2) || (_distance < 50000) } do { // Altis terrain is 47000m from corner to corner
+				private _distance = 500;
+				while { ((count _unitArray) < 2) || (_distance < 50000) } do { // Altis terrain is 47000m from corner to corner
 					
-				// 	_sortedArray = [_unitArray,indiCam_actor,_distance] call indiCam_fnc_distanceSort;
-				// 	_distance = _distance * 1.25;
-				// };
+					_sortedArray = [_unitArray,indiCam_actor,_distance] call indiCam_fnc_distanceSort;
+					_distance = _distance * 1.25;
+				};
 			};
-			
 			
 	case 8: { // Random unit within group of current unit
 				if (indiCam_debug) then {systemChat format ["Case: %1 - Auto switching between units in current group.", _case];};
