@@ -426,16 +426,16 @@ private _autoswitchCombo = (findDisplay indiCam_id_guiDialogMain) displayCtrl in
 // Populate RscCombo indiCam_gui_comboRandomizeActor
 {
 	_autoswitchCombo lbAdd _x;
-} forEach 	[ // Edited: Give more specific description - The order is dependent on index number to match function in main indiCam script
-			"Only players of all sides anywhere",
-			"Closest unit of any side",
-			"Any unit of any side",
-			"Random unit within distance of all sides",
-			"Only players on actor side",
-			"Closest unit on actor side",
-			"All units on actor side",
-			"Random unit search started within distance actor side",
-			"Random unit within group of current unit"
+} forEach 	[ // Edited: Refactor - The order is dependent on index number to match function in main indiCam script
+			"Players and AI Units near players outside base",
+			"Players outside base",
+			"AI Units near players ourside base",
+			"Players and AI Units near players within current actor's group outside base",
+			"Players and AI Units near players within current actor's group",
+			"Players within current actor's group",
+			"Random Units everywhere",
+			"Random Units everywhere",
+			"Random Units everywhere"
 			];
 
 // After loading gui, set the dropdown to it's current value
