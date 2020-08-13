@@ -146,7 +146,7 @@ switch (_case) do { // Edited: Refactor actor list
 				} forEach playableUnits;
 
 				{
-					if (side _x == _actorSide && {!(_x isPlayer) && {!(local _x)}}) then {_sortedArray pushback _x};
+					if ((side _x == _actorSide) && {!(_x isPlayer) && {!(local _x)}}) then {_sortedArray pushback _x};
 				} forEach _unitArray;
 				
 				_unitArray = _sortedArray;
