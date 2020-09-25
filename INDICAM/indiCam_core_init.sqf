@@ -1,59 +1,44 @@
-comment "-------------------------------------------------------------------------------------------------------";
-comment "											indiCam, by woofer.											";
-comment "																										";
-comment "										independent cinematic camera									";
-comment "																										";
-comment "																										";
-comment "	The purpose of the init is to compile all functions and set all variables from start.				";
-comment "																										";
-comment "																										";
-comment "	Definitions:																						";
-comment "	- Scene: A predefined camera angle with camera movement along with take time, fov and so on.		";
-comment "	- Variable names: indiCam_var_variableName															";
-comment "	- Function and script names: indiCam_fnc_functionOrScriptName(.sqf)									";
-comment "	- Object names: indiCam_objectName																	";
-comment "																										";
-comment "-------------------------------------------------------------------------------------------------------";
+//-------------------------------------------------------------------------------------------------------
+//											indiCam, by woofer.
+//
+//										independent cinematic camera									"
+//																										
+//																										
+//	The purpose of the init is to compile all functions and set all variables from start.				
+//																										
+//																										
+//	Definitions:																						
+//	- Scene: A predefined camera angle with camera movement along with take time, fov and so on.		
+//	- Variable names: indiCam_var_variableName															
+//	- Function and script names: indiCam_fnc_functionOrScriptName(.sqf)									
+//	- Object names: indiCam_objectName																	
+//																										
+//-------------------------------------------------------------------------------------------------------
 // Versioning: Significant new functionality adds to the tenth of a version, scene additions and fixes adds to the hundreds
 
 
 
 
 // Currently doing:
-/*
-
-Current problem seems to be that the button presses stack when initializing with mission control.
-
-What's the best way to stop them from being applied twice. I still want the CBA keybinds to work.
-
-Buttons don't work when GUI is open.
-
-*/
+// - Can't seem to compile with 	#include "\a3\editor_f\Data\Scripts\dikCodes.h"  in config.cpp
 
 
-
-
-/* Changelog version 1.31*/	
+/* Changelog version 1.32*/	
 ///		PRIORITIES / DONE
-//FIXED- Manual mode camera no longer resets after scene timer runs out or camera gets too far away from actor or actor gets hidden.
-//ADDED- Added CBA keybinds for when CBA is loaded. Without CBA, the legacy keypresses are still working.
-//FIXED- Manual camera now targets the actual actor, not any proxy objects.
-//REMOVED- Neither script nor mod version gives the cameraman an addaction anymore. Use default F1 or set your own key
-//ADDED- Added a centralized debug system. Replacement of old system in code will be ongoing.
+
+
 
 //TODO- Move keybinds from init to control script. Only F1 should work when camera is not running.
-//TODO- Make it so that the script can be started without the GUI stuff. vision index currently craps it up. check TETET's post
+//TODO- Make it so that the script can be started without the GUI stuff. vision index currently craps it up. check TETET's post. --> Thanks for this not so informative comment, past me.
 
-//TODO- Possibility to state conditions in a scene to disqualify it. For example if a scene should only be used for a specific vehicle.﻿﻿
-//TODO- F3 should reset auto switch timer for actor
+//TODO- Possibility to state conditions in a scene to disqualify it. For example if a scene should only be used for a specific vehicle.
 //TODO- When a player actor enters a vehicle, the camera autoswitches actor according to current settings instead of staying with the unit.
-//TODO- Make names of players show in GUI map
 //TODO- Make sure the camera keeps following actors after death.
 //TODO- Add "persistent actor" function if that's not already in by default by selecting "none" in randomizer. It would then need something else to do while respawning and come back to the same player unit after respawn.
 //TODO- Would be totally cool with a flashlight type function as with Zeus or the editor. Maybe spawn a local light above the actor?
 //TODO- Preventing scene switching doesn't seem to prevent scene switching by obscured actor. Are we fine with that?
 
-comment " SCRIPTED SCENES ";
+///		SCRIPTED SCENES 
 //TODO- How do the new special scene actor stuff work alongside unconcious units with ace or reggs script?
 //TODO- Add "killer" as scripted scene as a death scene. Could be made to be shown on every occation in GUI.
 //TODO- Detect incoming mortar fire and switch to show an overview of the location at impact
@@ -61,7 +46,7 @@ comment " SCRIPTED SCENES ";
 //TODO- When the AT script is activated, it should keep a lookout if the unit puts the AT back.
 //TODO- Scripted scene: DropOff - Keep track of helicopters when they have low velocity < 70 and are close to ground (< 10m) and in camera vincinity
 
-comment " BACKLOG ";
+///		BACKLOG
 //TODO- Fog of war functionality. A checkbox in the GUI that only shows enemies that current camera side knowsAbout.
 //TODO- Might need to spawn a background function that keeps track of indiCam_running variable
 //TODO- Scripted scenes that makes jumps to close-by animals
@@ -118,9 +103,9 @@ comment " BACKLOG ";
 //IDEA- Maybe use something like {_justPlayers = allPlayers - entities "HeadlessClient_F";} to find players instead of what's used now
 
 
-comment "-------------------------------------------------------------------------------------------------------";
-comment "													init												";
-comment "-------------------------------------------------------------------------------------------------------";
+// ------------------------------------------------------------------------------------------------------
+//													init												
+//-------------------------------------------------------------------------------------------------------
 // indiCam script should only init on player clients or on player hosts.
 if (!hasInterface) exitWith {};
 
@@ -131,30 +116,6 @@ indiCam_fnc_init = {	// Here to suspend initialization if there is a mission con
 
 	// Player is now either not spawned or has died
 	waitUntil {alive player};
-
-
-
-
-	/*
-
-	// Check if mission control object exists. If it does, stop init and let the mission control box add indicam to user on request
-	if !(isNil {missionNamespace getVariable "indiCam_missionControl"}) exitWith {
-
-		if (indiCam_debug) then {systemChat "Mission control box found"};
-
-		indiCam_missionControl addAction ["start indiCam", {				// Put the addaction to the object
-			[] spawn {
-				[] call indiCam_core_init;										// initialize indiCam scripts
-				hintSilent "indiCam starting...";
-				sleep 1;
-				createDialog "indiCam_gui_dialogMain";
-				hintSilent "indiCam initialized";
-			};
-			
-		}];
-
-	};
-	*/
 
 
 
@@ -179,9 +140,9 @@ indiCam_fnc_init = {	// Here to suspend initialization if there is a mission con
 	[] execVM "INDICAM\indiCam_core_diary.sqf";
 
 
-	comment "-------------------------------------------------------------------------------------------------------";
-	comment "												variables												";
-	comment "-------------------------------------------------------------------------------------------------------";
+	//-------------------------------------------------------------------------------------------------------
+	//												variables												
+	//-------------------------------------------------------------------------------------------------------
 	// Actor management
 	indiCam_var_enterVehicleEH = 0;				// Eventhandler for actorManager
 	indiCam_var_exitVehicleEH = 0;				// Eventhandler for actorManager
@@ -257,9 +218,9 @@ indiCam_fnc_init = {	// Here to suspend initialization if there is a mission con
 	// Variables to fix bugs
 	indiCam_var_visionIndex = 0;
 
-	comment "-------------------------------------------------------------------------------------------------------";
-	comment "												functions												";
-	comment "-------------------------------------------------------------------------------------------------------";
+	//-------------------------------------------------------------------------------------------------------
+	//												functions												
+	//-------------------------------------------------------------------------------------------------------
 	// Compile functions as a function. Makes it possible to compile on the fly
 	indiCam_fnc_compileAll = {
 		indiCam_core_main = compile preprocessFileLineNumbers "INDICAM\indiCam_core_main.sqf";
@@ -326,9 +287,9 @@ indiCam_fnc_init = {	// Here to suspend initialization if there is a mission con
 		missionNamespace setVariable ["indiCam_var_inizialized", true];
 
 
-		comment "-------------------------------------------------------------------------------------------------------";
-		comment "	Stop camera / Open GUI - F1-key																		";
-		comment "-------------------------------------------------------------------------------------------------------";
+		//-------------------------------------------------------------------------------------------------------
+		//	Stop camera / Open GUI - F1-key																		
+		//-------------------------------------------------------------------------------------------------------
 
 		// Define the function that is to run when the CBA bound key is pressed.
 		indiCam_fnc_keyGUI = {
@@ -363,8 +324,9 @@ indiCam_fnc_init = {	// Here to suspend initialization if there is a mission con
 }; // end of init function
 
 
-
-
+// If there is an object in the mission called indiCam_missionControl that will get the action menu option to initialize at will
+// Perfect for when only a specific user should have access to the indiCam script version
+// This part makes sure indiCam only initializes if there is no mission control box
 if (isNil {missionNamespace getVariable "indiCam_missionControl"}) then {
 
 	[] spawn indiCam_fnc_init; 												// Initialize indiCam if no box was found
